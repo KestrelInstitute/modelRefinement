@@ -1,0 +1,15 @@
+README for Python/Z3 code for performing Model Refinement
+
+Requirements: Python3, Z3
+
+Model Refinement Code
+1. Edit the main Python function mr.py and leave exactly one of the
+lines that import a model file uncommented.
+
+2. at the command line, run 'python mr.py'
+
+Path Normalization Code
+1. Edit the main Python function pn.py and leave exactly one of the
+lines that import a model file uncommented.
+
+2. at the command line, run 'python pn.py'
