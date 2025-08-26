@@ -1,0 +1,96 @@
+//partial grammar for XMV, sufficient for mr
+//s nedunuri, 2025
+
+start: module
+
+module: "MODULE" NAME section*
+
+section: define_section
+       | var_section
+       | ivar_section
+       | fun_section
+       | assign_section
+       | trans_section
+       | invar_section
+       | ltlspec_section
+
+define_section: "DEFINE" define_stmt*
+define_stmt: NAME ":=" expr ";"
+
+var_section: "VAR" var_decl*
+var_decl: NAME ":" type ";"
+
+ivar_section: "IVAR" ivar_decl*
+ivar_decl: NAME ":" type ";"
+
+fun_section: "FUN" fun_decl*
+fun_decl: NAME ":" fun_type ";"
+fun_type: type ("*" type)* "->" type
+
+assign_section: "ASSIGN" assign_stmt*
+assign_stmt: /[^;]+/ ";"
+
+trans_section: "TRANS" expr_list
+
+invar_section: "INVAR" expr
+
+ltlspec_section: "LTLSPEC" "NAME" NAME ":=" "G" expr
+
+expr_list: (expr ";")+
+
+?expr: or_expr
+
+?or_expr: and_expr
+        | or_expr "|" and_expr   -> or_op
+
+?and_expr: not_expr
+         | and_expr "&" not_expr -> and_op
+
+?not_expr: comparison
+         | "!" not_expr          -> not_op
+
+?comparison: arith_expr COMP_OP arith_expr -> compare
+           | arith_expr
+
+?arith_expr: arith_expr "+" term  -> add
+           | arith_expr "-" term  -> sub
+           | term
+
+?term: term "*" factor            -> mul
+     | term "/" factor            -> div
+     | factor
+
+//the rule for say INTVAL in smvParser turns the string "42" into the number 42 and then the rule for intval which is invoked by the -> turns it into a dict
+?factor: function_call
+       | INTVAL                   -> intval
+       | NUMBER                   -> number
+       | NAME                     -> var
+       | "(" expr ")"
+
+//function_call: NAME "(" expr ")"
+function_call: NAME "(" [expr ("," expr)*] ")"
+
+COMP_OP: ">" | ">=" | "<" | "<=" | "=" | "!="
+
+type: INTEGER
+    | BOOLEAN
+    | REAL
+    | enum_type
+    | range_type
+
+enum_type: "{" enum_value ("," enum_value)* "}"
+enum_value: INTVAL | NAME
+
+range_type: INTVAL ".." INTVAL
+
+INTEGER: "integer"
+BOOLEAN: "boolean"
+REAL: "real"
+NAME: /[a-zA-Z_][a-zA-Z0-9_]*/
+INTVAL: /-?\d+/
+
+NUMBER: /-?\d+\.\d+/    //only actual floats like 1.2 will match with NUMBER
+
+%import common.WS
+%ignore WS
+%ignore /--.*/  // single line comments

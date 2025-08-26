@@ -1,4 +1,15 @@
+'''
+TBD:
+- dont think DOING_FORALL_EXISTS is correctly used
+- migrate the other examples to the new model format
+
+'''
 from z3 import *
+DBG2 = True
+
+t0 = Tactic('qe_rec')
+
+def isEmpty(xs): return len(xs) == 0
 
 def printState0(i, expr):  # expr:Expression
     if is_and(expr):
@@ -22,8 +33,8 @@ def printList(es):  # es:List(Expression)
     for i in range(len(es)):
         print("  ", es[i])
 
-def printTransition(act, exprs):  # act:String, expr:List(Expression)
-    print("Transition:", act)
+def printTransition0(actname, exprs):  # act:String, expr:List(Expression)
+    print("Transition:", actname)
     #print(And(*exprs))
     i = 0
     for expr in exprs:
@@ -31,8 +42,20 @@ def printTransition(act, exprs):  # act:String, expr:List(Expression)
         print("  ", i, " ", expr)
         i = i+1
 
+def printTransition(act):  # act:Dictionary
+    exprs = []
+    if hasattr(act, 'envPred'):
+        exprs = exprs + expr2List(act.envPred)
+        # print("  EnvPred:", act.envPred)
+    if hasattr(act, 'controlPred'):
+        exprs = expr2List(act.controlPred)
+    if hasattr(act, 'actionPred'):
+        exprs = exprs + expr2List(act.actionPred)
+    printTransition0(act.name, exprs)
+
+'''Unused
 # state:Expr, transitions:List(Distionary(Action))
-def printModel(state, stateInv, transitions):
+def printModel0(state, stateInv, transitions):
     #print("\n-------------------------\nCurrent Model")
     print("State:", state)
     print("State Invariants")
@@ -41,6 +64,21 @@ def printModel(state, stateInv, transitions):
     #print("Transitions")
     for tr in transitions:
         printTransition(tr['name'], expr2List(tr['controlPred']) + expr2List(tr['envPred']) + expr2List(tr['actionPred']))
+    print()
+'''
+def printModel(model): # state, stateInv, transitions):
+    #print("\n-------------------------\nCurrent Model")
+    if hasattr(model, 'step_invariant'): print("  Step Invariant:", model.step_invariant)
+    for node in model.nodes:
+        if hasattr(node, "name"): print("Node:", node.name)
+        if hasattr(node, "vars"): print("  Vars:", node.vars)
+        if hasattr(node, "invariant"): print("  Node Invariant:", node.invariant) # printState(stateInv)
+        if hasattr(node, "envPred"): print("  EnvPred:", node.envPred)
+    for act in model.transitions:
+        # printTransition0(act.name, expr2List(act.controlPred)
+        #                 + expr2List(act.envPred)
+        #                 + expr2List(act.actionPred))
+        printTransition(act)
     print()
 
 # doesn't work - how to form an equality formula?
@@ -103,25 +141,65 @@ def makeSubstitution(vars, vars1):
     for index in range(len(vars)):
         subst = cons((vars[index], vars1[index]), subst)
     return subst
-    
-def is_action(expr, state1):
-    vs = get_vars(expr)
-    #print("expr vars:", vs, "state1 vars", state1)
-    for var in state1:
-        if var in vs:
+
+'''if expr contains even a single action var its an action pred'''    
+def isAction(expr, action_vars):
+    #ASSUME: not isNodePred(expr)
+    expr_vars = get_vars(expr)
+    #print("expr vars:", expr_vars, "state1 vars", state1)
+    for var in action_vars:
+        if var in expr_vars:
             return True
     return False
 
-def isStatePred(expr, state):
-    #print("isp?", expr)
-    vs = get_vars(expr)
-    #print("expr vars:", vs)
-    for var in vs:
-        #print("checking", var, "not in", state)
-        if not (var in state):
-            #print("isp", False)
+'''check if expr is pred that involves only the state vars'''
+def isStatePred(expr, vars):  #print("isp?", expr)
+    expr_vars = get_vars(expr)        #print("expr vars:", expr_vars)
+    for var in expr_vars:             #print("checking", var, "not in", state)
+        if not (var in vars): #print("isp", False)
             return False
     #print("isp", True)
+    return True
+
+"""check if the expr is a predicate on non updateable vars (other than state vars) """
+def isNodePred(expr, node, model=None):
+    expr_vars = get_vars(expr)  #print("IsOtherNodePred: testing expr vars:", expr_vars)
+    for var in expr_vars:
+        if  (model is None or not ((hasattr(model, 'constants') and var in model.constants))) and\
+            (model is None or not ((hasattr(model, 'externals') and var in model.externals))) and\
+            not (var in node.vars): 
+            return False
+    return True
+
+'''check for either of the above two cases'''
+# def isNodePred(expr, node, model=None): #print("inp?", expr)
+#     return isStatePred(expr, node.vars) or \
+#            (not (model is None) and isOtherKindOfNodePred(expr, node, model))
+    # expr_vars = get_vars(expr); #print("IsNodePred: testing expr vars:", expr_vars)
+    # for var in expr_vars:      
+    #     if not (var in node.vars or 
+    #             # (hasattr(node, 'envVars') and var in node.envVars) or 
+    #             # (hasattr(node, 'controlVars') and var in node.controlVars)): # or
+    #             (hasattr(model, 'constants') and var in model.constants) or 
+    #             (hasattr(model, 'externals') and var in model.externals)):
+    #         # print("isNodePred", False)
+    #         return False  #print("isp", True)
+    # return True
+
+def isArcPred(expr, transition, model):
+    if isNodePred(expr, transition.precNode, model) or isNodePred(expr, transition.postNode, model):
+        return False
+    """ SN: added this to handle the case of self arc on a node """
+    if transition.precNode == transition.postNode and isAction(expr, transition.precNode.postVars + transition.controlVars): # + transition.postNode.tempVars):
+        return True
+    expr_vars = get_vars(expr)
+    #print("expr vars:", expr_vars, "state1 vars", state1)
+    '''this handling the case of an arc between nodes, in which case instead of post state vars there will be state vars of tgt node'''
+    precvars = transition.precNode.vars
+    postvars = transition.postNode.vars
+    for var in expr_vars:
+        if not(var in precvars or var in postvars):
+            return False
     return True
 
 # convert g:Goal to a List(Expr)
@@ -169,5 +247,104 @@ def getRewrites(expr, qevars):
         if not subst == None:
             result = result + [subst]
     return result
-    
-    
+
+
+# def getGuard(act, node, model):
+#   return getGuard1(act.actionPred, node, model)
+
+# def getGuard1(action_pred, node, model):
+#     #print("gg:", act, state_vars)
+#     result = []
+#     for pred in expr2List(action_pred):
+#         #print("pred:", pred)
+#         if hasattr(model, 'DOING_FORALL_EXISTS') and model.DOING_FORALL_EXISTS: 
+#             if isNodePred(pred,node, model):
+#                 result.append(pred)
+#         else:
+#             if isStatePred(pred,node.vars):
+#                 result.append(pred)
+#     #print("result", result)
+#     guard = And(*result)
+#     guard = simplify(guard, local_ctx=True)
+#     # print("guard: ", guard)
+#     return guard
+'''this below only makes sense if ctrol pred was carefully updated so as to exclude any conjuncts belonging to the action pred, but dont currently do that
+def getGuard(act, node, model):
+    result = []
+    for pred in expr2List(act.actionPred):
+        if isNodePred(pred,node, model):
+            result.append(pred)
+    #print("result", result)
+    guard = And(*result, act.controlPred) # was guard = And(*result)
+    guard = simplify(guard, local_ctx=True)
+    # print("guard: ", guard)
+    return guard
+def getGuard(act):
+    return act.controlPred if hasattr(act, 'controlPred') else True
+'''
+""" def getCtrlPred(model, act):
+    g = getGuard(act)
+    if hasattr(model,'DOING_FORALL_EXISTS') and model.DOING_FORALL_EXISTS:
+        g = getConjNotContaining(g, act.precNode.postVars)
+    else:
+        g = getConjNotContaining(g, act.envVars + act.precNode.postVars)
+    return g """
+
+""" def getGuard(act):
+    # print("foo", getFoo(act.actionPred, act.precNode.postVars))
+    return And(act.controlPred, getConjNotContaining(act.actionPred, act.precNode.postVars)) if hasattr(act, 'controlPred') else True """
+
+# def getFoo(actionPred, vars):
+#     #*TBD: need to fix this for multiiplayer, ie dont use postvars
+#     return getConjNotContaining(actionPred, vars)
+# 
+""" def strengthenGuard(act,guard):
+    # new_act_pred = simplify(And(*cdSimplifyE(And(guard, act.actionPred))), local_ctx=True)
+    new_act_pred = simplify(And(guard, act.actionPred), local_ctx=True)
+    # new_act_pred = simplify(And(wp_x, act.actionPred))
+    # new_act_pred = simplify(And(wp_x, act.actionPred))
+    if DBG2: print("new actionPred:\n" + str(new_act_pred))
+    act.actionPred = new_act_pred """
+
+""" def replaceGuard(act, guard):
+    #pull out the existing guard -> (guard, action part)
+    action_part = getConjContaining(act.actionPred, act.precNode.postVars)
+    act.actionPred = And(guard, action_part) """
+
+def simplifyAndQE(formula):
+    formula_simp = simplify(formula)
+    # if DBG2: print('formula_simp = \n', formula_simp)
+    # eliminate quantifiers and then simplify
+    formula_qe = t0(formula_simp)[0]  # returns Goal: list of conjuncts
+    #print("t0(wcTrans):", qewcTransG)
+    formula_e = simplify(formula_qe.as_expr())
+    return formula_e
+
+def containsVars(expr, vs):
+    all_vars = get_vars(expr)
+    return not set(all_vars).isdisjoint(vs)
+
+def getConjNotContaining(p, vs):
+    result = []
+    for c in expr2List(p):
+        #print("c:", c)
+        if not containsVars(c,vs):
+            result.append(c)
+    #print("result", result)
+    result = And(*result)
+    result = simplify(result, local_ctx=True)
+    return result
+
+def getConjContaining(p, vs):
+    result = []
+    for c in expr2List(p):
+        #print("c:", c)
+        if containsVars(c,vs):
+            result.append(c)
+    #print("result", result)
+    result = And(*result)
+    result = simplify(result, local_ctx=True)
+    return result
+
+def implies(p,q):
+    return not p or q

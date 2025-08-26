@@ -81,7 +81,25 @@ def simplifyDisjunction(context, expr):
         i = i+1
     return newExpr
 
-    
+# if there is an equation var=val in a conjunction, or in LHS of implication,
+# then eliminate it and replace all occurrences of var by val
+# TODO: use quantification over the var plus QE to acheive this
+def varElimination (expr):
+    if is_and(expr):
+        #print("conjuncts:", expr.children())
+        eqs = True
+        for h in expr.children():
+            #print(h)
+            if is_eq(h) and is_const(h.children()[0]):  # TODO: handle other cases too
+                var = h.children()[0]
+                val = h.children()[1]
+                #print("h:", var, "==", val)
+                expr = simplify(substitute(expr, [(var,val)]))
+                eqs = And(h, eqs)
+        expr = simplify(And(eqs,expr))
+        #print("varElim result:", expr)
+    return expr
+        
 # context:List(Expr), expr:Expr
 # returns e:Goal s.t. context => (expr == e)
 def cdSimplifyE_aux(context, expr):   
@@ -124,16 +142,23 @@ def cdSimplifyE_aux(context, expr):
         result.add(simplify(cls))
         #print("or result:", result)
     elif is_and(expr):
+        expr = varElimination(expr)
         #print("conjuncts:", expr.children())
         pool = Goal()   # local context
-        for h in expr.children():   # print(h)
+        for h in expr.children():
+            #print(h)
             pool.add(h)
+        oldc = True; old_res = True
         for c in expr.children():  # conjuncts
             #print("conjunct:", c)
-            pool = remove(pool, c)  # .as_expr().children()
+            pool = remove(pool, c)
+            if not old_res == True: pool.add(oldc)  #SN: bug fix
+            oldc = c
+            #print("pool:", pool)
             c1 = cdSimplifyE_aux(context + goal2List(pool) + [result.as_expr()], c)
             #print("c1:", c1.as_expr())
-            result.add(c1.as_expr())
+            old_res = c1.as_expr()
+            result.add(old_res)
             #print("current result", result)
         #print("and result:", result)
     else:     # is atomic(?);  Implies is normalized to Or
@@ -145,7 +170,9 @@ def cdSimplifyE_aux(context, expr):
 
 # expr:Expr -> return:Goal
 def cdSimplifyE(expr):   
-      #print("cdse:", expr) #, expr.children())
+    # print("cdse:", expr) 
+    expr = varElimination(expr)
+    # print("cdse varElim:", expr)
     result = cdSimplifyE_aux([], expr)
     #print("cdse result:", result)
     return result
@@ -162,7 +189,7 @@ def residue0(ante, expr):   # ante,expr:Expression
         chk = Solver()
         chk.add(Not(f))
         chk.add(ante)
-        if sat == chk.check():
+        if chk.check() == sat:
             result.add(f)
         #if unsat == chk.check(): #print("eliminating",f)
     #print("result:", result)
@@ -170,8 +197,8 @@ def residue0(ante, expr):   # ante,expr:Expression
 
 # return a Goal that is the conjunction of f in expr not implied by ante
 def residue(ante, expr):   # ante,expr:Expression
-    #print("find residue of", expr)
-    #print("assuming",ante)
+    # print("Assuming", str(ante)+",")
+    # print("Find residue of", expr)
     result = cdSimplifyE_aux(expr2List(ante), expr)
     #print("result:", result)
     return result
