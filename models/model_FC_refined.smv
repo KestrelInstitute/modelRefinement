@@ -1,0 +1,46 @@
+-- final refined model produced by mr v4 hand converted to nuXMV. To run do the following:
+-- nuxmv -int models/model_FC_refined.smv. At the prompt type:
+-- nuXmv > go_msat
+-- nuXmv > check_property_as_invar_ic3 -P <prop name>
+
+MODULE main
+--optional DEFINE DOING_FORALL_EXISTS := TRUE;
+VAR 
+    buf : integer;
+    out : {0,1,2,3,4};
+    u : {-1,0,1}; -- u is a control variable that can take values -1, 0, or 1
+
+IVAR e: {0,1,2,3,4};
+
+FUN
+    _U : integer * integer * integer -> boolean; -- essentially represents the existential quantifier as a Skolem function
+
+-- ASSIGN
+-- any init's needed?
+
+-- are asserting that the traces of the machine are those satisfying this trans relation, ie those state pairs. Suppose you have trans reln (x'>x+e) and e were a regular VAR of type {0,1} then the triples we are allowing in the reln are (0,1,0), (0,1,1), etc but not (1,0,0), so certain triples are simply not admitted into the relation. But this doesn't apply e is an IVAR (env var). The trans relation includes the triples with *all* values of e, so (1,0,0) is now included. (b/c e is universally quantified ie there's a "\A e" in front of the relation) Which makes the satisfaction of a given property that much more harder. This is particualrly important in verification unlike synthesis where you don't get to construct the model it already exists
+TRANS
+    _U(buf,out,u) & (-1 <= u & u <= 1) &
+    -- these are the strenghtneing of U found by mr
+    out + u >= 0 &
+    out + u <= 4 &
+    -1*buf + 2*u + 3*out >= -9 &
+    buf + -2*u + -3*out >= -1 &
+    -1*buf + 4*u + 5*out >= -6 &
+    buf + -4*u + -5*out >= -6 &
+    -- underlying transition relation:
+    next(buf) = buf + e - out &
+    next(out) = out + u;
+
+INVAR 
+    buf >= 0 & out >= 0 &
+    -- strengthening of the invariant found by mr
+    buf + -1*out <= 16 &
+    -1*buf + out <= 0 &
+    -3*out + buf <= 11 &
+    3*out + -1*buf <= 3 &
+    -4*out + buf <= 10 &
+    4*out + -1*buf <= 6
+
+LTLSPEC
+    NAME prop1 := G (0 <= buf & buf <= 20 & 0 <= out & out <= 4)

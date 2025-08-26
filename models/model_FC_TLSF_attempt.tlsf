@@ -1,0 +1,42 @@
+INFO {
+  TITLE:       "TLSF formulation of MR spec for water tank problem"
+  DESCRIPTION: "this is NOT valid TLSF due to the existential quantifier over non parametric variables and the presence of non boolean variables"
+  SEMANTICS:   Moore
+  TARGET:      Mealy
+}
+
+GLOBAL {
+  PARAMETERS {
+    MAX = 4;
+  }
+
+  DEFINITIONS {
+    //instantiate with your problem specific definitions
+    E(e) = -MAX <= e <= MAX;
+    U(u) = -1 <= u <= 1;
+    Phi(s) = s >= 0;
+    //old T(s) = EXISTS[L] (s = L) && (X (s = L + u + ))
+  }
+}
+
+MAIN {
+  INPUTS {
+    inflow;
+  } 
+
+  OUTPUTS {
+    u;            // control var
+    water_level;  // regular state var
+  }
+  INITIALLY inflow = 0
+  PRESET Phi(water_level)
+  //REQUIRE   // --> G psi_e
+  //ASSERT    // --> G psi_s
+  //ASSUME    // --> G phi_s
+  GUARANTEE  // --> G phi_s
+  {
+    EXISTS[U(u)] FORALL[E(inflow)] EXISTS[True(L)] 
+      (water_level = L) && X (water_level = L + u + inflow && Phi(water_level))
+  }
+  
+}

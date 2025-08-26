@@ -1,0 +1,41 @@
+MODULE main
+--optional DEFINE DOING_FORALL_EXISTS := TRUE;
+VAR 
+    buf : integer;
+    out : integer;
+    -- out : {0,1,2,3,4};
+    u : {-1,0,1}; -- ##CONTROL##
+
+IVAR e: {0,1,2,3,4};
+    -- If i extend nuXMV syntax:
+    -- IVAR e1: integer;
+    -- IVAR e2: integer;
+    -- ASSUME e1 + e2 <= 10;
+
+FUN
+    --_U : integer * integer * integer -> boolean; -- essentially represents the existential quantifier as a Skolem function
+    -- if we were doing \A e E(e), \E u. U(s,e,u) .. then U would also take e as a parameter 
+    -- If i extend nuXMV syntax, can do more complex constraints on u:
+    -- REQUIRE _U(buf,out,u) <-> 2u+1 <= 10; 
+
+-- ASSIGN
+-- any init's needed?
+
+-- are asserting that the traces of the machine are those satisfying this trans relation, ie those state pairs. Suppose you have trans reln (x'>x+e) and e were a regular VAR of type {0,1} then the triples we are allowing in the reln are (0,1,0), (0,1,1), etc but not (1,0,0), so certain triples are simply not admitted into the relation. But this doesn't apply e is an IVAR (env var). The trans relation includes the triples with *all* values of e, so (1,0,0) is now included. (The reason is that there is a "\A e" in front of the relation) Which makes the satisfaction of a given property that much more harder. This is particualrly important in verification unlike synthesis where you don't get to construct the model it already exists
+TRANS
+    -- _U(buf,out,u) & (_U(buf,out,u) -> (-1 <= u & u <= 1)) &
+    -- for a general env predicate E(e1,e2) ->
+    -- _U(buf,out,u) & (-1 <= u & u <= 1) &
+    next(buf) = buf + e - out &
+    next(out) = out + u;
+
+INVAR 
+    -- not an invar why is it here? buf >= 0 & out >= 0
+    -- not here, b/c not asserting that -1 <= u & u <= 1 and also may want control pred to depend on e
+    --_E(e) -> 
+    -- 0 <= e & e <= 4 
+    TRUE
+    -- rest of required inv To be discovered by mr
+
+LTLSPEC
+    NAME prop1 := G (0 <= buf & buf <= 20 & 0 <= out & out <= 4)
