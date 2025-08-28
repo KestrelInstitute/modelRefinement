@@ -1,0 +1,197 @@
+@!@!@STARTMSG 2262:0 @!@!@
+TLC2 Version 2.16 of Day Month 20?? (rev: c824a8a)
+@!@!@ENDMSG 2262 @!@!@
+@!@!@STARTMSG 2187:0 @!@!@
+Running breadth-first search Model-Checking with fp 18 and seed 1280292379790628925 with 1 worker on 8 cores with 7220MB heap and 64MB offheap memory [pid: 2588] (Windows 10 10.0 amd64, AdoptOpenJDK 14.0.1 x86_64, MSBDiskFPSet, DiskStateQueue).
+@!@!@ENDMSG 2187 @!@!@
+@!@!@STARTMSG 2220:0 @!@!@
+Starting SANY...
+@!@!@ENDMSG 2220 @!@!@
+Parsing file C:\Users\snedunu\Documents\Projects\FM\model_refinement_LDRD_21_24\fromZip\Tokeneer\specs\Tokeneer.toolbox\Model_III_SnapShot_1633625069882\TE.tla
+Parsing file C:\Users\snedunu\Documents\Projects\FM\model_refinement_LDRD_21_24\fromZip\Tokeneer\specs\Tokeneer.toolbox\Model_III_SnapShot_1633625069882\Tokeneer.tla
+Parsing file C:\ProgramFiles\TLA-1.8.0\toolbox\plugins\org.lamport.tlatools_1.0.0.202109030417\tla2sany\StandardModules\Toolbox.tla
+Parsing file C:\ProgramFiles\TLA-1.8.0\toolbox\plugins\org.lamport.tlatools_1.0.0.202109030417\tla2sany\StandardModules\TLC.tla
+Parsing file C:\ProgramFiles\TLA-1.8.0\toolbox\plugins\org.lamport.tlatools_1.0.0.202109030417\tla2sany\StandardModules\Naturals.tla
+Parsing file C:\Users\snedunu\Documents\Projects\FM\model_refinement_LDRD_21_24\fromZip\Tokeneer\specs\Tokeneer.toolbox\Model_III_SnapShot_1633625069882\TokeneerIII.tla
+Parsing file C:\ProgramFiles\TLA-1.8.0\toolbox\plugins\org.lamport.tlatools_1.0.0.202109030417\tla2sany\StandardModules\Integers.tla
+Parsing file C:\ProgramFiles\TLA-1.8.0\toolbox\plugins\org.lamport.tlatools_1.0.0.202109030417\tla2sany\StandardModules\Sequences.tla
+Parsing file C:\ProgramFiles\TLA-1.8.0\toolbox\plugins\org.lamport.tlatools_1.0.0.202109030417\tla2sany\StandardModules\FiniteSets.tla
+Semantic processing of module Naturals
+Semantic processing of module Integers
+Semantic processing of module Sequences
+Semantic processing of module FiniteSets
+Semantic processing of module TLC
+Semantic processing of module TokeneerIII
+Semantic processing of module Tokeneer
+Semantic processing of module Toolbox
+Semantic processing of module TE
+@!@!@STARTMSG 2219:0 @!@!@
+SANY finished.
+@!@!@ENDMSG 2219 @!@!@
+@!@!@STARTMSG 2185:0 @!@!@
+Starting... (2021-10-16 17:50:25)
+@!@!@ENDMSG 2185 @!@!@
+@!@!@STARTMSG 2189:0 @!@!@
+Computing initial states...
+@!@!@ENDMSG 2189 @!@!@
+@!@!@STARTMSG 2190:0 @!@!@
+Finished computing initial states: 1 distinct state generated at 2021-10-16 17:50:26.
+@!@!@ENDMSG 2190 @!@!@
+@!@!@STARTMSG 2110:1 @!@!@
+Invariant _inv is violated.
+@!@!@ENDMSG 2110 @!@!@
+@!@!@STARTMSG 2121:1 @!@!@
+The behavior up to this point is:
+@!@!@ENDMSG 2121 @!@!@
+@!@!@STARTMSG 2217:4 @!@!@
+1: <Initial predicate>
+/\ lastInsertT = -9
+/\ unlockDeadlines = {}
+/\ __trace_var_1634431825503259000 = TRUE
+/\ __trace_var_1634431825503261000 = FALSE
+/\ clock = 0
+/\ token = FALSE
+/\ insertHappened = FALSE
+/\ __trace_var_1634431825503263000 = "--"
+/\ lastUnlockT = 9
+/\ locked = TRUE
+
+@!@!@ENDMSG 2217 @!@!@
+@!@!@STARTMSG 2217:4 @!@!@
+2: <next_sa_0 line 55, col 9 to line 105, col 13 of module TE>
+/\ lastInsertT = 0
+/\ unlockDeadlines = {3}
+/\ __trace_var_1634431825503259000 = TRUE
+/\ __trace_var_1634431825503261000 = FALSE
+/\ clock = 1
+/\ token = TRUE
+/\ insertHappened = TRUE
+/\ __trace_var_1634431825503263000 = TRUE
+/\ lastUnlockT = 9
+/\ locked = TRUE
+
+@!@!@ENDMSG 2217 @!@!@
+@!@!@STARTMSG 2217:4 @!@!@
+3: <next_sa_1 line 111, col 9 to line 161, col 13 of module TE>
+/\ lastInsertT = 0
+/\ unlockDeadlines = {}
+/\ __trace_var_1634431825503259000 = TRUE
+/\ __trace_var_1634431825503261000 = TRUE
+/\ clock = 2
+/\ token = TRUE
+/\ insertHappened = TRUE
+/\ __trace_var_1634431825503263000 = TRUE
+/\ lastUnlockT = 1
+/\ locked = FALSE
+
+@!@!@ENDMSG 2217 @!@!@
+@!@!@STARTMSG 2217:4 @!@!@
+4: <next_sa_2 line 167, col 9 to line 217, col 13 of module TE>
+/\ lastInsertT = 0
+/\ unlockDeadlines = {}
+/\ __trace_var_1634431825503259000 = TRUE
+/\ __trace_var_1634431825503261000 = TRUE
+/\ clock = 3
+/\ token = FALSE
+/\ insertHappened = TRUE
+/\ __trace_var_1634431825503263000 = TRUE
+/\ lastUnlockT = 1
+/\ locked = FALSE
+
+@!@!@ENDMSG 2217 @!@!@
+@!@!@STARTMSG 2217:4 @!@!@
+5: <next_sa_3 line 223, col 9 to line 273, col 13 of module TE>
+/\ lastInsertT = 0
+/\ unlockDeadlines = {}
+/\ __trace_var_1634431825503259000 = TRUE
+/\ __trace_var_1634431825503261000 = FALSE
+/\ clock = 4
+/\ token = FALSE
+/\ insertHappened = TRUE
+/\ __trace_var_1634431825503263000 = TRUE
+/\ lastUnlockT = 1
+/\ locked = TRUE
+
+@!@!@ENDMSG 2217 @!@!@
+@!@!@STARTMSG 2217:4 @!@!@
+6: <next_sa_4 line 279, col 9 to line 329, col 13 of module TE>
+/\ lastInsertT = 4
+/\ unlockDeadlines = {7}
+/\ __trace_var_1634431825503259000 = TRUE
+/\ __trace_var_1634431825503261000 = FALSE
+/\ clock = 5
+/\ token = TRUE
+/\ insertHappened = TRUE
+/\ __trace_var_1634431825503263000 = TRUE
+/\ lastUnlockT = 1
+/\ locked = TRUE
+
+@!@!@ENDMSG 2217 @!@!@
+@!@!@STARTMSG 2217:4 @!@!@
+7: <next_sa_5 line 335, col 9 to line 385, col 13 of module TE>
+/\ lastInsertT = 4
+/\ unlockDeadlines = {7}
+/\ __trace_var_1634431825503259000 = TRUE
+/\ __trace_var_1634431825503261000 = FALSE
+/\ clock = 6
+/\ token = FALSE
+/\ insertHappened = TRUE
+/\ __trace_var_1634431825503263000 = TRUE
+/\ lastUnlockT = 1
+/\ locked = TRUE
+
+@!@!@ENDMSG 2217 @!@!@
+@!@!@STARTMSG 2217:4 @!@!@
+8: <next_sa_6 line 391, col 9 to line 441, col 13 of module TE>
+/\ lastInsertT = 6
+/\ unlockDeadlines = {7, 9}
+/\ __trace_var_1634431825503259000 = TRUE
+/\ __trace_var_1634431825503261000 = FALSE
+/\ clock = 7
+/\ token = TRUE
+/\ insertHappened = TRUE
+/\ __trace_var_1634431825503263000 = TRUE
+/\ lastUnlockT = 1
+/\ locked = TRUE
+
+@!@!@ENDMSG 2217 @!@!@
+@!@!@STARTMSG 2217:4 @!@!@
+9: <next_sa_7 line 447, col 9 to line 497, col 13 of module TE>
+/\ lastInsertT = 6
+/\ unlockDeadlines = {}
+/\ __trace_var_1634431825503259000 = TRUE
+/\ __trace_var_1634431825503261000 = TRUE
+/\ clock = 8
+/\ token = TRUE
+/\ insertHappened = TRUE
+/\ __trace_var_1634431825503263000 = TRUE
+/\ lastUnlockT = 7
+/\ locked = FALSE
+
+@!@!@ENDMSG 2217 @!@!@
+@!@!@STARTMSG 2217:4 @!@!@
+10: <next_sa_8 line 503, col 9 to line 553, col 13 of module TE>
+/\ lastInsertT = 6
+/\ unlockDeadlines = {}
+/\ __trace_var_1634431825503259000 = TRUE
+/\ __trace_var_1634431825503261000 = TRUE
+/\ clock = 9
+/\ token = FALSE
+/\ insertHappened = TRUE
+/\ __trace_var_1634431825503263000 = TRUE
+/\ lastUnlockT = 7
+/\ locked = FALSE
+
+@!@!@ENDMSG 2217 @!@!@
+@!@!@STARTMSG 2200:0 @!@!@
+Progress(10) at 2021-10-16 17:50:26: 10 states generated (1,237 s/min), 10 distinct states found (1,237 ds/min), 0 states left on queue.
+@!@!@ENDMSG 2200 @!@!@
+@!@!@STARTMSG 2199:0 @!@!@
+10 states generated, 10 distinct states found, 0 states left on queue.
+@!@!@ENDMSG 2199 @!@!@
+@!@!@STARTMSG 2194:0 @!@!@
+The depth of the complete state graph search is 10.
+@!@!@ENDMSG 2194 @!@!@
+@!@!@STARTMSG 2186:0 @!@!@
+Finished in 489ms at (2021-10-16 17:50:26)
+@!@!@ENDMSG 2186 @!@!@

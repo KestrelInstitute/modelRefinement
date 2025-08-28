@@ -1,0 +1,283 @@
+@!@!@STARTMSG 2262:0 @!@!@
+TLC2 Version 2.16 of Day Month 20?? (rev: c824a8a)
+@!@!@ENDMSG 2262 @!@!@
+@!@!@STARTMSG 2187:0 @!@!@
+Running breadth-first search Model-Checking with fp 0 and seed 7525086896748886494 with 4 workers on 8 cores with 2407MB heap and 5414MB offheap memory [pid: 20832] (Windows 10 10.0 amd64, AdoptOpenJDK 14.0.1 x86_64, OffHeapDiskFPSet, DiskStateQueue).
+@!@!@ENDMSG 2187 @!@!@
+@!@!@STARTMSG 2220:0 @!@!@
+Starting SANY...
+@!@!@ENDMSG 2220 @!@!@
+Parsing file C:\Users\snedunu\Documents\Projects\FM\model_refinement_LDRD_21_24\fromZip\Tokeneer\specs\Tokeneer.toolbox\Model_I\MC.tla
+Parsing file C:\Users\snedunu\Documents\Projects\FM\model_refinement_LDRD_21_24\fromZip\Tokeneer\specs\Tokeneer.toolbox\Model_I\Tokeneer.tla
+Parsing file C:\ProgramFiles\TLA-1.8.0\toolbox\plugins\org.lamport.tlatools_1.0.0.202109030417\tla2sany\StandardModules\TLC.tla
+Parsing file C:\Users\snedunu\Documents\Projects\FM\model_refinement_LDRD_21_24\fromZip\Tokeneer\specs\Tokeneer.toolbox\Model_I\TokeneerIII.tla
+Parsing file C:\ProgramFiles\TLA-1.8.0\toolbox\plugins\org.lamport.tlatools_1.0.0.202109030417\tla2sany\StandardModules\Naturals.tla
+Parsing file C:\ProgramFiles\TLA-1.8.0\toolbox\plugins\org.lamport.tlatools_1.0.0.202109030417\tla2sany\StandardModules\Integers.tla
+Parsing file C:\ProgramFiles\TLA-1.8.0\toolbox\plugins\org.lamport.tlatools_1.0.0.202109030417\tla2sany\StandardModules\Sequences.tla
+Parsing file C:\ProgramFiles\TLA-1.8.0\toolbox\plugins\org.lamport.tlatools_1.0.0.202109030417\tla2sany\StandardModules\FiniteSets.tla
+Semantic processing of module Naturals
+Semantic processing of module Integers
+Semantic processing of module Sequences
+Semantic processing of module FiniteSets
+Semantic processing of module TLC
+Semantic processing of module TokeneerIII
+Semantic processing of module Tokeneer
+Semantic processing of module MC
+@!@!@STARTMSG 2219:0 @!@!@
+SANY finished.
+@!@!@ENDMSG 2219 @!@!@
+@!@!@STARTMSG 2185:0 @!@!@
+Starting... (2021-10-18 11:45:35)
+@!@!@ENDMSG 2185 @!@!@
+@!@!@STARTMSG 2189:0 @!@!@
+Computing initial states...
+@!@!@ENDMSG 2189 @!@!@
+@!@!@STARTMSG 2190:0 @!@!@
+Finished computing initial states: 1 distinct state generated at 2021-10-18 11:45:36.
+@!@!@ENDMSG 2190 @!@!@
+@!@!@STARTMSG 2193:0 @!@!@
+Model checking completed. No error has been found.
+  Estimates of the probability that TLC did not check all reachable states
+  because two distinct states had the same fingerprint:
+  calculated (optimistic):  val = 4.9E-15
+@!@!@ENDMSG 2193 @!@!@
+@!@!@STARTMSG 2201:0 @!@!@
+The coverage statistics at 2021-10-18 11:45:36
+@!@!@ENDMSG 2201 @!@!@
+@!@!@STARTMSG 2773:0 @!@!@
+<Init line 64, col 1 to line 64, col 4 of module TokeneerIII>: 1:1
+@!@!@ENDMSG 2773 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 65, col 5 to line 72, col 16 of module TokeneerIII: 1
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2772:0 @!@!@
+<Next line 93, col 1 to line 93, col 4 of module TokeneerIII>: 247:608
+@!@!@ENDMSG 2772 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 93, col 9 to line 93, col 17 of module TokeneerIII: 248
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 44, col 9 to line 44, col 14 of module TokeneerIII: 303
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 44, col 10 to line 44, col 14 of module TokeneerIII: 248
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 44, col 33 to line 44, col 38 of module TokeneerIII: 55
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 45, col 9 to line 45, col 19 of module TokeneerIII: 55
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 45, col 16 to line 45, col 19 of module TokeneerIII: 63
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 45, col 24 to line 45, col 44 of module TokeneerIII: 55
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 45, col 41 to line 45, col 44 of module TokeneerIII: 63
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 46, col 9 to line 46, col 26 of module TokeneerIII: 55
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 46, col 22 to line 46, col 26 of module TokeneerIII: 63
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 46, col 31 to line 46, col 81 of module TokeneerIII: 55
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 46, col 50 to line 46, col 81 of module TokeneerIII: 63
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 47, col 9 to line 47, col 41 of module TokeneerIII: 55
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 51, col 9 to line 51, col 13 of module TokeneerIII: 127
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 52, col 9 to line 52, col 20 of module TokeneerIII: 127
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 52, col 16 to line 52, col 20 of module TokeneerIII: 139
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 52, col 25 to line 52, col 103 of module TokeneerIII: 127
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 32, col 9 to line 32, col 14 of module TokeneerIII: 100
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 32, col 19 to line 32, col 42 of module TokeneerIII: 100
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 32, col 19 to line 32, col 23 of module TokeneerIII: 150
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 32, col 28 to line 32, col 42 of module TokeneerIII: 150
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 33, col 9 to line 33, col 21 of module TokeneerIII: 100
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 33, col 26 to line 33, col 46 of module TokeneerIII: 100
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 33, col 51 to line 33, col 70 of module TokeneerIII: 100
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 34, col 13 to line 34, col 60 of module TokeneerIII: 100
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 38, col 9 to line 38, col 15 of module TokeneerIII: 346
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 38, col 10 to line 38, col 15 of module TokeneerIII: 248
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 39, col 9 to line 39, col 20 of module TokeneerIII: 98
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 39, col 25 to line 39, col 102 of module TokeneerIII: 98
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 85, col 14 to line 85, col 33 of module TokeneerIII: 228
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 89, col 80 to line 89, col 99 of module TokeneerIII: 648
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 89, col 80 to line 89, col 98 of module TokeneerIII: 648
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 87, col 24 to line 87, col 52 of module TokeneerIII: 648
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |||line 87, col 24 to line 87, col 28 of module TokeneerIII: 648
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |||line 87, col 33 to line 87, col 52 of module TokeneerIII: 648
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||||line 27, col 12 to line 27, col 80 of module TokeneerIII: 648
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |||||line 27, col 15 to line 27, col 19 of module TokeneerIII: 648
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |||||line 27, col 26 to line 27, col 35 of module TokeneerIII: 453
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |||||line 27, col 42 to line 27, col 80 of module TokeneerIII: 195
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||||||line 27, col 61 to line 27, col 79 of module TokeneerIII: 195
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |||||||line 27, col 74 to line 27, col 79 of module TokeneerIII: 259
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |||||||line 27, col 70 to line 27, col 71 of module TokeneerIII: 195
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||||||line 27, col 55 to line 27, col 56 of module TokeneerIII: 195
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||||line 87, col 37 to line 87, col 51 of module TokeneerIII: 1038
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 93, col 54 to line 93, col 72 of module TokeneerIII: 608
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 87, col 24 to line 87, col 52 of module TokeneerIII: 608
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 87, col 24 to line 87, col 28 of module TokeneerIII: 608
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 87, col 33 to line 87, col 52 of module TokeneerIII: 608
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |||line 27, col 12 to line 27, col 80 of module TokeneerIII: 608
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||||line 27, col 15 to line 27, col 19 of module TokeneerIII: 608
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||||line 27, col 26 to line 27, col 35 of module TokeneerIII: 411
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||||line 27, col 42 to line 27, col 80 of module TokeneerIII: 197
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |||||line 27, col 61 to line 27, col 79 of module TokeneerIII: 197
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||||||line 27, col 74 to line 27, col 79 of module TokeneerIII: 230
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||||||line 27, col 70 to line 27, col 71 of module TokeneerIII: 197
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |||||line 27, col 55 to line 27, col 56 of module TokeneerIII: 197
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |||line 87, col 37 to line 87, col 51 of module TokeneerIII: 608
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2774:0 @!@!@
+<TypeCheck line 55, col 1 to line 55, col 9 of module TokeneerIII>
+@!@!@ENDMSG 2774 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 56, col 6 to line 62, col 43 of module TokeneerIII: 468
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 56, col 9 to line 56, col 26 of module TokeneerIII: 468
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 57, col 9 to line 57, col 26 of module TokeneerIII: 468
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 58, col 9 to line 58, col 21 of module TokeneerIII: 468
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 59, col 9 to line 59, col 28 of module TokeneerIII: 468
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 60, col 9 to line 60, col 28 of module TokeneerIII: 468
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 61, col 9 to line 61, col 34 of module TokeneerIII: 468
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 62, col 9 to line 62, col 43 of module TokeneerIII: 468
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 62, col 35 to line 62, col 43 of module TokeneerIII: 169
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 62, col 18 to line 62, col 32 of module TokeneerIII: 468
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2778:0 @!@!@
+<constr_1634582735057377000 line 15, col 1 to line 15, col 26 of module MC>: 389:609
+@!@!@ENDMSG 2778 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 16, col 1 to line 16, col 17 of module MC: 609
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2202:0 @!@!@
+End of statistics.
+@!@!@ENDMSG 2202 @!@!@
+@!@!@STARTMSG 2200:0 @!@!@
+Progress(8) at 2021-10-18 11:45:36: 609 states generated (36,503 s/min), 248 distinct states found (14,865 ds/min), 0 states left on queue.
+@!@!@ENDMSG 2200 @!@!@
+@!@!@STARTMSG 2199:0 @!@!@
+609 states generated, 248 distinct states found, 0 states left on queue.
+@!@!@ENDMSG 2199 @!@!@
+@!@!@STARTMSG 2194:0 @!@!@
+The depth of the complete state graph search is 8.
+@!@!@ENDMSG 2194 @!@!@
+@!@!@STARTMSG 2268:0 @!@!@
+The average outdegree of the complete state graph is 1 (minimum is 0, the maximum 3 and the 95th percentile is 3).
+@!@!@ENDMSG 2268 @!@!@
+@!@!@STARTMSG 2186:0 @!@!@
+Finished in 1005ms at (2021-10-18 11:45:36)
+@!@!@ENDMSG 2186 @!@!@
