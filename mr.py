@@ -1,4 +1,4 @@
-# MR v4: 
+# MR v3: 
 # - refactored
 # - handles multinode models
 # - permits both "\A e. E(). \E u. U()" and "\E u. U(). \A e. E()" forms
@@ -80,7 +80,7 @@ def initInvsWithSafetyProps():
                 print("**ERROR: property", phi, "is not a node or arc pred. Continuing with any remaining predicates")
         # else we have a path predicate; TODO: call pn
     # not all step props have pre and post vars (eg see model_plan) 
-    if 'stepProps' in locals(): 
+    if 'stepProps' in globals(): 
       for phi in stepProps:
         print("\nInitializing arc label with step property\n", phi)
         for act in transitions: # for action goals
@@ -416,6 +416,8 @@ def generateControlStrategyByCases(model):
 
             bounds = getBounds(act.controlVars, origControlPreds[act.name])
             # bounds = [0,4]; print("***ASSUMING FIXED BOUND!!")
+            if bounds == None:
+                break
             print("bounds:", bounds)
             # wcps = t0(makeWeakestControllablePredecessor(act))[0].as_expr()
             # print("wcps:", wcps)
@@ -445,10 +447,16 @@ mr() #(model, initProps, safetyProps)  # for models where each node has at most 
 # assume: uConstraint has the form And(lb <= u, u <= ub) UNUSED
 def getBounds(us, uConstraint):
     result = []
-    assert len(us) == 1, "getBounds currently expects a single control variable"
+    # assert len(us) == 1, "getBounds currently expects a single control variable"
+    if len(us) != 1:
+        print("***getBounds currently expects a single control variable. Not generating a control function for this action")
+        return None
     u = us[0]
     # print("u:", u, "|", uConstraint)
-    assert is_int(u), "u must be an integer"
+    # assert is_int(u), "u must be an integer"
+    if not is_int(u): 
+        print("***u must be an integer. Not generating control function for this action")
+        return None
     for ineq in uConstraint.children():
         if u == ineq.children()[0]:
             result.append(ineq.children()[1].as_long())

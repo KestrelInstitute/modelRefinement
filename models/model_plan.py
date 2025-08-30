@@ -73,12 +73,13 @@ initProps = []
 #should be called nodeProps, but name retained for legacy reasons
 safetyProps = \
   [
-    st >= 0, dur3 == SVC_D, st3 == SVC_T, AVAIL <= st
+    # st >= 0, dur3 == SVC_D, st3 == SVC_T, AVAIL <= st
+    st >= 0, AVAIL <= st
   ]
 
-""" Step prop b/c a transition does not take place unless dur3 and st3 have these values. Was originally a state prop but that doesn't work b/c L(s') was trying to use the current iteration's value of dur3 and st3. Instead we want to say that dur3 st3 only get assingned their satisfying values if the action is taken. """
-# stepProps = \
-#   [dur3 == SVC_D, st3 == SVC_T, AVAIL <= st]
+""" stepProp is for step props that do not involve pre and post vars but are nevertheless properties of an arc, in this case b/c they involve control vars dur1 and dur3 (indirectly via st3). Note that dur3 st3 only get assingned their satisfying values if the action is taken. """
+stepProps = \
+  [dur3 == SVC_D, st3 == SVC_T]#, AVAIL <= st]
 
 if __name__ == "__main__": 
    print('model', model)
